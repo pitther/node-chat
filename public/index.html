@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"  type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="data/chat.css">
+    <script src="data/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="message_template">
+      <li class="message">
+        <div class="avatar"></div>
+        <div class="text_wrapper">
+          <span class="message_name"></span>
+          <div class="text"></div>
+        </div>
+      </li>
+    </div>
+    <div id="loader_container">
+      <div class="loader" id="loader"></div>
+    </div>
+    <div class="content-blured" id="content">
+        <div class="chat_window">
+          <div class="top_menu">
+            <div class="buttons">
+              <a data-placement="right" onclick=" console.log('press');user.exit_session();" class="button close" data-toggle="tooltip" title="Выход"></a>
+              <a data-placement="right" onclick="admin()" class="button admin" data-toggle="tooltip" title="Панель админа" id="btn_admin"></a>
+              <a data-placement="right" onclick="open_settings_modal()" class="button minimize"  data-toggle="tooltip" title="Настройки"></a>
+              <a data-placement="right" onclick="" class="button maximize" data-toggle="tooltip" id="ttp_online" title='Онлайн: '></a>
+            </div>
+            <div class="title">Чат</div>
+          </div>
+          <ul class="messages">
+          </ul>
+          <div class="bottom_wrapper clearfix">
+            <div class="message_input_wrapper">
+              <input class="message_input" placeholder="Введите сообщение.." />
+            </div><div class="send_message">
+              <div class="icon"></div>
+              <div class="text_send">Отправить</div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+    <div id="auth_modal" class="modal fade" onkeydown = "if (event.keyCode == 13) document.getElementById('btn_login').click()">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Авторизация</h4>
+              </div>
+              <div class="container-fluid text-center" style="">
+                <form class="form-inline" id="login-form" style="padding:5px; margin: 15px; margin-bottom: 15px;">
+                  <div class="form-group has-feedback" id="login-form-group">
+                    <input type="text" maxlength="15" class="form-control " placeholder="Введите имя" id="usr">
+                    <span class="glyphicon glyphicon-remove form-control-feedback" id="glyhp-err-1" style="display: none"></span>
+                  </div>
+                  <div class="form-group has-feedback" style="" id="login-form-group">
+                    <input type="password" maxlength="20" class="form-control" placeholder="Введите пароль" id="pwd" >
+                    <span class="glyphicon glyphicon-remove form-control-feedback" id="glyhp-err-2" style="display: none"></span>
+                  </div>
+                </form>
+              <div class="modal-footer">
+                <div class="container-fluid text-center" >
+                <button class="btn btn-success" onclick="verify_auth(document.getElementById('usr').value, document.getElementById('pwd').value)" id="btn_login">Войти </button>
+                <br>
+                <button class="btn btn-default " onclick="register()" id="btn_register" style="margin-top: 8px">Зарегистрироваться</button>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <div id="settings_modal" class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Настройки</h4>
+              </div>
+              <div class="container-fluid text-center" style="padding:5px;">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td><h5>Картинка профиля</h5></td>
+                      <td>
+                        <input type="text" class="form-control" placeholder="Введите url картинки" id="set_url">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <button class="btn" onclick="close_settings_modal()">Отмена</button>
+                <button class="btn btn-success" onclick="apply_settings()">Применить</button>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="data/con-js.js" type="text/javascript"></script>
+    <script src="script.js" type="text/javascript"></script>
+  </body>
+
+</html>
